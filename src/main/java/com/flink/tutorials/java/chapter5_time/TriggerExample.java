@@ -57,6 +57,7 @@ public class TriggerExample {
                     triggerResult = TriggerResult.FIRE_AND_PURGE;
                 } else if ((lastPriceState.value() - element.price) > lastPriceState.value() * 0.01) {
                     // 跌幅不大，注册一个10秒后的Timer
+                    // FIXME 减去 (triggerContext.getCurrentProcessingTime() % 10 * 1000) 什么意思?? @liweibo 2022-08-06
                     long t = triggerContext.getCurrentProcessingTime() + (10 * 1000 - (triggerContext.getCurrentProcessingTime() % 10 * 1000));
                     triggerContext.registerProcessingTimeTimer(t);
                 }
